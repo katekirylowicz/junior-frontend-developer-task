@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+dist/
+build/
+.vite/
+
+# environment
+.env*
+!.env.example
+
+# system
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Angular
+/out-tsc/
+
+.angular/
+*.tsbuildinfo
+
+
+# coverage
+/coverage/

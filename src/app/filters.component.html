@@ -1,0 +1,40 @@
+<div class="card mb-3 p-3">
+  <h2 class="text-primary mb-3">Filtry zadań</h2>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label for="name-filter" class="form-label">Nazwa zadania</label>
+      <input
+        type="text"
+        id="name-filter"
+        class="form-control"
+        [(ngModel)]="filterName"
+        (input)="applyFilters()"
+        placeholder="Wpisz nazwę zadania">
+    </div>
+    <div class="col-md-4">
+      <label for="date-filter" class="form-label">Data</label>
+      <input
+        type="date"
+        id="date-filter"
+        class="form-control"
+        [(ngModel)]="filterDate"
+        (change)="applyFilters()">
+    </div>
+    <div class="col-md-4">
+      <label for="status-filter" class="form-label">Status</label>
+      <select
+        id="status-filter"
+        class="form-select"
+        [(ngModel)]="filterStatus"
+        (change)="applyFilters()">
+        <option value="All">Wszystkie</option>
+        <option value="Completed">Completed</option>
+        <option value="Pending">Pending</option>
+        <option value="Planned">Planned</option>
+      </select>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end mt-3">
+    <button class="btn btn-outline-secondary" (click)="resetFilters()">Resetuj filtry</button>
+  </div>
+</div>

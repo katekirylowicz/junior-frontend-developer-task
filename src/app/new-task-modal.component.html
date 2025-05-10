@@ -1,0 +1,67 @@
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show d-block': showModal}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Dodaj nowe zadanie</h2>
+        <button type="button" class="btn-close" aria-label="Zamknij" (click)="close()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="taskForm" (ngSubmit)="submitForm()">
+          <div class="mb-3">
+            <label for="taskName" class="form-label">Nazwa zadania</label>
+            <input
+              type="text" 
+              class="form-control"
+              id="taskName"
+              formControlName="name"
+              [ngClass]="{'is-invalid': taskForm.get('name')?.invalid && taskForm.get('name')?.touched}"
+            >
+            <div *ngIf="taskForm.get('name')?.invalid && taskForm.get('name')?.touched" class="invalid-feedback">
+              Nazwa zadania jest wymagana.
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="taskDate" class="form-label">Data</label>
+            <input
+              type="date"
+              class="form-control"
+              id="taskDate"
+              formControlName="date"
+              [ngClass]="{'is-invalid': taskForm.get('date')?.invalid && taskForm.get('date')?.touched}"
+            >
+            <div *ngIf="taskForm.get('date')?.invalid && taskForm.get('date')?.touched" class="invalid-feedback">
+              <span *ngIf="taskForm.get('date')?.errors?.['required']">Data jest wymagana.</span>
+              <span *ngIf="taskForm.get('date')?.errors?.['pastDate']">Data nie może być z przeszłości.</span>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="taskDescription" class="form-label">Opis (opcjonalnie)</label>
+            <textarea
+              class="form-control"
+              id="taskDescription"
+              rows="3"
+              formControlName="description"
+            ></textarea>
+          </div>
+          
+          <div class="mb-3">
+            <label for="taskStatus" class="form-label">Status</label>
+            <select class="form-select" id="taskStatus" formControlName="status">
+              <option value="Planned">Zaplanowane</option>
+              <option value="Pending">W trakcie</option>
+              <option value="Completed">Ukończone</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Anuluj</button>
+        <button type="button" class="btn btn-primary" (click)="submitForm()">Zapisz zadanie</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showModal" class="modal-backdrop fade show"></div>
