@@ -1,24 +1,63 @@
-<div class="container">
-  <div class="d-flex my-4">
-    <h1>Lista zadań</h1>
-    <button class="btn btn-primary mx-3">Dodaj zadanie</button>
+<div class="container mb-5">
+  <div class="d-flex justify-content-between my-4">
+    <h1 class="text-primary">Lista zadań</h1>
+    <button class="btn btn-primary" (click)="openAddTaskModal()">Dodaj zadanie</button>
   </div>
-  <ul class="list-group">
-    @for (task of tasks; track $index) {
-      <li class="list-group-item d-block">
-        <div class="item" [ngClass]="{ 'completed': task.status === 'Completed' }">
-          <input type="checkbox" class="form-check-input me-2" [checked]="task.status === 'Completed'"
-                 (change)="toggleCompleted(task)">
+  <app-task-filter (filtersChanged)="onFiltersChanged($event)"></app-task-filter>
 
-          <b class="text-primary">{{ task.name }}</b>
-          <button class="btn btn-link" (click)="toggleDescription()">pokaż opis</button>
-          <br>
-          {{ task.date }} - <span class="badge bg-info">{{ task.status }}</span>
-          @if (descVisible) {
-            <p>{{ task?.description }}</p>
-          }
+  <ul class="list-group">
+    @for (task of filteredTasks; track $index) {
+      <li class="list-group-item">
+        <div class="item d-flex justify-content-between" [ngClass]="{ 'completed': task.status === 'Completed' }">
+          <div>
+            <i class="text-secondary">{{ task.date }} - </i>
+            <b class="text-primary">{{ task.name }}</b>
+          </div>
+          <span class="badge rounded-pill p-2"
+             [ngClass]="{
+               'bg-success': task.status === 'Completed',
+               'bg-primary': task.status === 'Pending',
+               'bg-secondary': task.status === 'Planned'
+             }">{{ task.status }}
+            </span>
+        </div>
+        <span class="form-check form-switch my-3">
+          <label for="task-{{$index}}" class="visually-hidden">Oznacz zadanie {{ task.name }} jako ukończone</label>
+          <input id="task-{{$index}}" type="checkbox" class="form-check-input me-2" [checked]="task.status === 'Completed'"
+                 (change)="toggleCompleted(task)">
+        </span>
+        <div role="tablist" aria-label="Rozwiń opis zadania">
+          <button
+            class="btn btn-outline-primary"
+            id="task-tab-{{ $index }}"
+            (click)="toggleDescription($index)"
+            [attr.aria-controls]="'task-panel-' + $index"
+            [attr.aria-selected]="task.descVisible"
+            role="tab"
+            type="button">
+            {{ task.descVisible ? 'Ukryj opis' : 'Pokaż opis' }}
+          </button>
+        </div>
+        <div
+          class="tab-pane text-primary my-3 tab-pane fade show active"
+          [hidden]="!task.descVisible"
+          role="tabpanel"
+          [attr.id]="'task-panel-' + $index"
+          [attr.aria-labelledby]="'task-tab-' + $index"
+          [ngClass]="{
+            'text-success': task.status === 'Completed',
+            'text-primary': task.status === 'Pending',
+            'text-secondary': task.status === 'Planned'
+          }">
+          {{ task.description }}
         </div>
       </li>
     }
+    @if (filteredTasks.length === 0) {
+      <li class="list-group-item text-center py-4">
+        <p class="text-muted">Brak zadań spełniających kryteria wyszukiwania.</p>
+      </li>
+    }
   </ul>
+  <app-task-modal (taskAdded)="onTaskAdded($event)"></app-task-modal>
 </div>
