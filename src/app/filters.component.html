@@ -2,35 +2,35 @@
   <h2 class="text-primary mb-3">Filtry zadań</h2>
   <div class="row g-3">
     <div class="col-md-4">
-      <label for="name-filter" class="form-label">Nazwa zadania</label>
+      <label for="name-filter" class="form-label text-secondary">Nazwa zadania</label>
       <input
         type="text"
         id="name-filter"
-        class="form-control"
+        class="form-control text-secondary"
         [(ngModel)]="filterName"
         (input)="applyFilters()"
         placeholder="Wpisz nazwę zadania">
     </div>
     <div class="col-md-4">
-      <label for="date-filter" class="form-label">Data</label>
+      <label for="date-filter" class="form-label text-secondary">Data</label>
       <input
         type="date"
         id="date-filter"
-        class="form-control"
+        class="form-control text-secondary"
         [(ngModel)]="filterDate"
         (change)="applyFilters()">
     </div>
     <div class="col-md-4">
-      <label for="status-filter" class="form-label">Status</label>
+      <label for="status-filter" class="form-label text-secondary">Status</label>
       <select
         id="status-filter"
-        class="form-select"
+        class="form-select text-secondary"
         [(ngModel)]="filterStatus"
         (change)="applyFilters()">
         <option value="All">Wszystkie</option>
-        <option value="Completed">Completed</option>
-        <option value="Pending">Pending</option>
-        <option value="Planned">Planned</option>
+        <option value="Completed">Skończone</option>
+        <option value="Pending">W trakcie</option>
+        <option value="Planned">Zaplanowane</option>
       </select>
     </div>
   </div>
