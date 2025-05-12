@@ -1,0 +1,27 @@
+
+.list-group-item .item {
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.list-group-item .item .badge {
+  align-self: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 576px) {
+  .list-group-item .item {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .list-group-item .item > div {
+    flex-basis: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .list-group-item .item .badge {
+    align-self: flex-start;
+  }
+}

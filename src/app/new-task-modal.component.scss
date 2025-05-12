@@ -1,9 +1,23 @@
 .modal-backdrop {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .modal {
   &.show {
     background-color: rgba(0, 0, 0, 0.4);
   }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #626364;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.2) sepia(1) hue-rotate(170deg) saturate(200%);
+  opacity: 0.7;
+}
+
+input[type="date"]::-moz-calendar-picker-indicator {
+  filter: invert(0.2) sepia(1) hue-rotate(170deg) saturate(200%);
+  opacity: 0.7;
 }

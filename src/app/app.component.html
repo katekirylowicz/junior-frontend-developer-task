@@ -4,7 +4,6 @@
     <button class="btn btn-primary" (click)="openAddTaskModal()">Dodaj zadanie</button>
   </div>
   <app-task-filter (filtersChanged)="onFiltersChanged($event)"></app-task-filter>
-
   <ul class="list-group">
     @for (task of filteredTasks; track $index) {
       <li class="list-group-item">
@@ -54,8 +53,8 @@
       </li>
     }
     @if (filteredTasks.length === 0) {
-      <li class="list-group-item text-center py-4">
-        <p class="text-muted">Brak zadań spełniających kryteria wyszukiwania.</p>
+      <li class="list-group-item text-center text-secondary py-4">
+        Brak zadań spełniających kryteria wyszukiwania.
       </li>
     }
   </ul>
