@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
-import { NgClass, NgStyle, CommonModule } from '@angular/common';
+import { NgClass, CommonModule } from '@angular/common';
 import { TaskFormModalComponent, Task } from './new-task-modal.component';
 import { TaskService } from './new-task-modal.service';
 import { TaskFilterComponent, TaskFilters } from './filters.component';
